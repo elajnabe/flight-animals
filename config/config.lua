@@ -1,5 +1,7 @@
 Config = Config or {}
 
+Config.Debug = false
+
 Config.Zones = {
     [1] = {
         defAmount = 3,
