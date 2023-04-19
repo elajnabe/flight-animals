@@ -1,6 +1,6 @@
 # flight-animals
 
- Wildlife script for fivem
+Wildlife script for fivem
 
 ## Features
 
