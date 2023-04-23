@@ -17,6 +17,7 @@ RegisterNetEvent('flight-animals:client:spawnAnimals', function(netIds, Location
         TaskWanderStandard(APed, 10, 10)
         SetCanAttackFriendly(APed, false, true)
         SetEntityAsMissionEntity(APed, true, true)
+        SetPedDefaultComponentVariation(APed)
     end
 end)
 
