@@ -2,8 +2,14 @@
 function Init()
     -- Initialize each zone
     for k, v in pairs(Config.Zones) do
-        exports["ps-zones"]:CreatePolyZone("animal_zone_"..k, v.zone.coords,
-            {debugPoly = Config.Debug, minZ = v.zone.height.min, maxZ = v.zone.height.max})
+        lib.zones.sphere({
+            coords = v.zone.coords,
+            radius = v.zone.radius > 30 and 30 or v.zone.radius < 1 and 1 or v.zone.radius,
+            debug = Config.Debug,
+            onEnter = function()
+                TriggerServerEvent("oxlib-zones:enter", "animal_zone_"..k)
+            end,
+        })
     end
 end
 

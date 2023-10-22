@@ -8,7 +8,7 @@ repository   'https://github.com/DevTheBully/flight-animals'
 -- Start the script 
 files {'peds.meta'}
 server_scripts {'server/*.lua'}
-shared_scripts {'config/*.lua'}
+shared_scripts {'config/*.lua', '@ox_lib/init.lua',}
 client_scripts {  
     '@PolyZone/client.lua',
     '@PolyZone/BoxZone.lua',

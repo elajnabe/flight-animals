@@ -39,11 +39,10 @@ Wildlife script for fivem
 
 ## Dependencies
 
-- [PolyZone](https://github.com/mkafrin/PolyZone)
-- [ps-zones](https://github.com/Project-Sloth/ps-zones)
+- [ox_lib](https://github.com/overextended/ox_lib)
 
 ## Links
 
-- [Discord](https://discord.gg/dXzkPaRaq3)
+- [Discord](https://discord.gg/flightdev)
 - [Website](https://flightdev.co)
 - [Tebex](https://fivem.flightdev.co)

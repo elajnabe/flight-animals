@@ -1,18 +1,13 @@
 Config = Config or {}
 
-Config.Debug = false
+Config.Debug = true
 
 Config.Zones = {
     [1] = {
         defAmount = 3,
         zone = {
-            coords = {
-                vector2(-2201.0236816406, 2327.6989746094),
-                vector2(-2258.4938964844, 2306.5080566406),
-                vector2(-2247.7514648438, 2263.7687988281),
-                vector2(-2182.19140625, 2293.1325683594)
-            },
-            height = {min = 20, max = 40}
+            coords = vector3(-2201.0236816406, 2327.6989746094, 30.0),
+            radius = 20,
         },
         spawnPoints = {
             [1] = {
