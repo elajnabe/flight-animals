@@ -11,7 +11,6 @@ Wildlife script for fivem
 
 ## Add-On Animals
 
-- Bear
 - Bobcat
 - Brown Bear
 - Crocodile
@@ -23,7 +22,6 @@ Wildlife script for fivem
 - Great White
 - Horn Bill
 - Leopard
-- Lion
 - Macaw
 - Male Lion
 - Owl

@@ -1,28 +1,42 @@
 local animalZones = {}
 
+local function getRandomCoordsInRadius(center, radius)
+    local angle = math.rad(math.random(0, 360))
+    local distance = math.random() * radius
+
+    local x = center.x + distance * math.cos(angle)
+    local y = center.y + distance * math.sin(angle)
+    local z = center.z
+
+    return vector3(x, y, z)
+end
+
 local function spawnAnimals(source, zone, amount)
     local netIds = {}
     if animalZones[zone] then netIds = animalZones[zone] end
+    local zoneData = Config.Zones[zone]
     for _ = 1, amount do
-        local zoneRand = Config.Zones[zone].spawnPoints[math.random(1, #Config.Zones[zone].spawnPoints)]
-        local pedstuff = CreatePed(30, joaat(zoneRand.possibleAnimals[math.random(1, #zoneRand.possibleAnimals)]),
-            zoneRand.coords.x, zoneRand.coords.y, zoneRand.coords.z, zoneRand.coords.w, true, false)
+        local zoneRand = getRandomCoordsInRadius(zoneData.coords, zoneData.radius)
+        local groundZ = lib.callback.await('flight-animals:client:getGround', source, zoneRand)
+        local animal = zoneData.possibleAnimals[math.random(1, #zoneData.possibleAnimals)]
+        local pedstuff = CreatePed(30, joaat(animal), zoneRand.x, zoneRand.y, groundZ, math.random(0, 360), true, false)
         while not DoesEntityExist(pedstuff) do Wait(25) end
         netIds[#netIds + 1] = NetworkGetNetworkIdFromEntity(pedstuff)
     end
-    Wait(300)
+    Wait(100 * amount)
     animalZones[zone] = netIds
     TriggerClientEvent('flight-animals:client:spawnAnimals', source, netIds, Config.Zones[zone])
 end
 
 -- Events
-RegisterServerEvent("oxlib-zones:enter", function(ZoneName)
-    if not ZoneName:sub(1, -1) == "animal_zone_" then return end
-    if animalZones[tonumber(ZoneName:sub(-1))] == nil then
-        spawnAnimals(source, tonumber(ZoneName:sub(-1)), Config.Zones[tonumber(ZoneName:sub(-1))].defAmount)
+RegisterServerEvent("flight-animals:zone:enter", function(ZoneName)
+    local zoneNumber = tonumber(string.match(ZoneName, "animal_zone_(%d+)"))
+    if not zoneNumber then return end
+    if not animalZones[zoneNumber] then
+        spawnAnimals(source, zoneNumber, Config.Zones[zoneNumber].defAmount)
     else
         TriggerClientEvent('flight-animals:client:checkExistence', source,
-            { source = source, zone = tonumber(ZoneName:sub(-1)), animalZones = animalZones })
+            { source = source, zone = zoneNumber, animalZones = animalZones })
     end
 end)
 
